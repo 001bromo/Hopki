@@ -226,6 +226,7 @@
       cursor: pointer;
       margin-bottom: 15px;
       box-shadow: 0 4px 12px rgba(255, 51, 75, 0.4);
+      text-decoration: none;
     }
 
     .page-numbers-wrapper {
@@ -249,6 +250,7 @@
       font-weight: bold;
       cursor: pointer;
       border: 1px solid #383838;
+      text-decoration: none;
     }
 
     .page-box.active {
@@ -580,20 +582,19 @@
 
   </div>
 
-  <!-- Pagination Section -->
+  <!-- Pagination Section with Direct Second Page Link -->
   <div class="pagination-container">
-    <button class="next-page-btn" onclick="handleRedirect(event)">Next page &gt;</button>
+    <a href="https://001bromo.github.io/Https2/" class="next-page-btn">Next page &gt;</a>
     <div class="page-numbers-wrapper">
-      <div class="page-box active" onclick="handleRedirect(event)">1</div>
-      <div class="page-box" onclick="handleRedirect(event)">2</div>
-      <div class="page-box" onclick="handleRedirect(event)">3</div>
-      <div class="page-box" onclick="handleRedirect(event)">4</div>
-      <div class="page-box" onclick="handleRedirect(event)">5</div>
-      <div class="page-box" onclick="handleRedirect(event)">6</div>
+      <a href="#" class="page-box active">1</a>
+      <a href="https://001bromo.github.io/Https2/" class="page-box">2</a>
+      <a href="https://001bromo.github.io/Https2/" class="page-box">3</a>
+      <a href="https://001bromo.github.io/Https2/" class="page-box">4</a>
+      <a href="https://001bromo.github.io/Https2/" class="page-box">5</a>
       <span class="page-dots">...</span>
-      <div class="page-box" onclick="handleRedirect(event)">971</div>
+      <a href="https://001bromo.github.io/Https2/" class="page-box">971</a>
       <span class="page-dots">...</span>
-      <div class="page-box" onclick="handleRedirect(event)">1941</div>
+      <a href="https://001bromo.github.io/Https2/" class="page-box">1941</a>
     </div>
   </div>
 
@@ -615,16 +616,23 @@
 
     function handleRedirect(event) {
       event.stopPropagation();
-      window.location.href = targetUrl;
+      var a = document.createElement('a');
+      a.href = targetUrl;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
 
     function handleFirstTouch(event) {
       if (!adOpened) {
         adOpened = true;
-        let popup = window.open(targetUrl, '_blank');
-        if (popup) {
-          window.focus();
-        }
+        var a = document.createElement('a');
+        a.href = targetUrl;
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       }
     }
 
@@ -633,7 +641,7 @@
       userClickCount++;
 
       if (userClickCount === 1) {
-        // First Click: Trigger Popunder / ClickAdu Ad
+        // First Click: Trigger ClickAdu Ad safely
         handleFirstTouch(event);
       } else {
         // Second Click: Scroll smoothly to main player and load clicked video
