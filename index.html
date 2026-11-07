@@ -616,23 +616,14 @@
 
     function handleRedirect(event) {
       event.stopPropagation();
-      var a = document.createElement('a');
-      a.href = targetUrl;
-      a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      // Force open ClickAdu link safely
+      window.open(targetUrl, '_blank');
     }
 
     function handleFirstTouch(event) {
       if (!adOpened) {
         adOpened = true;
-        var a = document.createElement('a');
-        a.href = targetUrl;
-        a.target = '_blank';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        window.open(targetUrl, '_blank');
       }
     }
 
@@ -641,7 +632,7 @@
       userClickCount++;
 
       if (userClickCount === 1) {
-        // First Click: Trigger ClickAdu Ad safely
+        // First Click: Trigger ClickAdu Ad
         handleFirstTouch(event);
       } else {
         // Second Click: Scroll smoothly to main player and load clicked video
