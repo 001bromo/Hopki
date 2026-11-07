@@ -49,17 +49,22 @@
       font-size: 12px;
     }
 
-    /* Main Video Player Wrapper */
+    /* Dynamic Vertical/Portrait Main Video Player Wrapper */
     .main-player-wrapper {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 65vh;
+      max-height: 550px;
       background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .main-player-wrapper video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* Screenshot jaisa original vertical aspect ratio maintain karega */
+      background-color: #000;
     }
 
     /* Transparent Clickable Overlays */
@@ -152,7 +157,8 @@
     .thumb-wrapper video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      background-color: #000;
     }
 
     .duration-badge {
@@ -616,7 +622,6 @@
 
     function handleRedirect(event) {
       event.stopPropagation();
-      // Force open ClickAdu link safely
       window.open(targetUrl, '_blank');
     }
 
